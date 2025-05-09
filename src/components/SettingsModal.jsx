@@ -15,13 +15,19 @@ const SettingsModal = ({ onClose }) => {
   };
 
   const clearAllData = () => {
-    if (window.confirm("Are you sure you want to clear all saved questions and sessions?")) {
-      localStorage.removeItem("interview_questions");
-      localStorage.removeItem("interview_sessions");
-      alert("All data cleared.");
-      onClose();
-    }
-  };
+  if (window.confirm("Are you sure you want to clear all saved questions and sessions?")) {
+    localStorage.removeItem("interview_questions");
+    localStorage.removeItem("interview_sessions");
+
+    // ✅ Dispatch event to tell React components to update
+    window.dispatchEvent(new CustomEvent("localStorageCleared"));
+
+    alert("All data cleared.");
+    onClose();
+  }
+};
+
+
 
   return (
     <div className="modal d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>

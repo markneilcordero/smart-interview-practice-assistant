@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QuestionCard from "./QuestionCard";
 import SessionStats from "./SessionStats";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -124,7 +124,7 @@ const defaultQuestions = [
 ];
 
 const PracticePage = () => {
-  const [questions] = useLocalStorage("interview_questions", defaultQuestions);
+  const [questions, setQuestions] = useLocalStorage("interview_questions", defaultQuestions);
   const [sessions, setSessions] = useLocalStorage("interview_sessions", []);
   const { addSession } = useSessionHistory();
 
@@ -132,6 +132,18 @@ const PracticePage = () => {
   const [answered, setAnswered] = useState([]);
   const [showHint, setShowHint] = useState(false);
   const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+  const handleClear = () => {
+    setQuestions([]);
+    setAnswered([]);
+    setCurrentIndex(0);
+    setFinished(false);
+  };
+
+  window.addEventListener("localStorageCleared", handleClear);
+  return () => window.removeEventListener("localStorageCleared", handleClear);
+}, []);
 
   const handleAnswer = (answer) => {
   const current = questions[currentIndex];

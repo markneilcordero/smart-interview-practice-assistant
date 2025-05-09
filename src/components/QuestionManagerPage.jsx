@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QuestionItem from "./QuestionItem";
 import QuestionFormModal from "./QuestionFormModal";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -7,6 +7,15 @@ const QuestionManagerPage = () => {
   const [questions, setQuestions] = useLocalStorage("interview_questions", []);
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+  const handleClear = () => {
+    setQuestions([]);
+  };
+
+  window.addEventListener("localStorageCleared", handleClear);
+  return () => window.removeEventListener("localStorageCleared", handleClear);
+}, []);
 
   const handleAdd = (newQuestion) => {
     const updated = [...questions, { ...newQuestion, id: Date.now() }];
