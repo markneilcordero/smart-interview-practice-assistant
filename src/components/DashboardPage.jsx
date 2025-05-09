@@ -77,19 +77,26 @@ const DashboardPage = () => {
       ) : (
         <>
           <div className="mb-5">
-            <h5>Category Distribution</h5>
-            <Pie data={pieData} />
-          </div>
+  <h5>Category Distribution</h5>
+  <div className="chart-container" style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <Pie data={pieData} options={{ responsive: true, maintainAspectRatio: true }} />
+  </div>
+</div>
 
-          <div className="mb-5">
-            <h5>Answered by Difficulty</h5>
-            <Bar data={barData} />
-          </div>
+<div className="mb-5">
+  <h5>Answered by Difficulty</h5>
+  <div className="chart-container" style={{ maxWidth: "800px", margin: "0 auto" }}>
+    <Bar data={barData} options={{ responsive: true, maintainAspectRatio: true }} />
+  </div>
+</div>
 
-          <div className="mb-5">
-            <h5>Progress Over Sessions</h5>
-            <Line data={lineData} />
-          </div>
+<div className="mb-5">
+  <h5>Progress Over Sessions</h5>
+  <div className="chart-container" style={{ maxWidth: "1000px", margin: "0 auto" }}>
+    <Line data={lineData} options={{ responsive: true, maintainAspectRatio: false, height: 300 }} />
+  </div>
+</div>
+
         </>
       )}
     </div>
