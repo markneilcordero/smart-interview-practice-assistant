@@ -7,6 +7,21 @@ body {
   transition: background-color 0.3s ease;
 }
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+}
+
 h2, h3, h5 {
   font-weight: 600;
 }

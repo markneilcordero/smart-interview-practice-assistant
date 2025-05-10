@@ -5,19 +5,25 @@ import PracticePage from "./components/PracticePage";
 import DashboardPage from "./components/DashboardPage";
 import HistoryPage from "./components/HistoryPage";
 import QuestionManagerPage from "./components/QuestionManagerPage";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/practice" replace />} />
-        <Route path="/practice" element={<PracticePage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/questions" element={<QuestionManagerPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className="page-wrapper d-flex flex-column min-vh-100">
+        <Navbar />
+        <div className="page-content flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Navigate to="/practice" replace />} />
+            <Route path="/practice" element={<PracticePage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/questions" element={<QuestionManagerPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 };
